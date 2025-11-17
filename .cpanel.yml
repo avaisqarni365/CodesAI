@@ -1,0 +1,27 @@
+---
+# cPanel Git Deployment Configuration
+# This file is used when deploying via cPanel's Git Version Control
+
+deployment:
+  tasks:
+    # Install dependencies
+    - export DEPLOYPATH=/home/username/public_html
+    - /bin/cp -R * $DEPLOYPATH
+
+    # If Node.js app (uncomment if using Node.js on cPanel)
+    # - export NVM_DIR="$HOME/.nvm"
+    # - source $NVM_DIR/nvm.sh
+    # - nvm use 18
+    # - cd $DEPLOYPATH
+    # - npm ci --production
+    # - npm run build
+
+    # Set permissions
+    - /bin/chmod -R 755 $DEPLOYPATH
+
+    # Cleanup
+    - /bin/rm -rf $DEPLOYPATH/.git
+    - /bin/rm -rf $DEPLOYPATH/node_modules
+
+    # Copy only necessary files for static site
+    - /bin/cp -R out/* $DEPLOYPATH/ || /bin/cp -R .next/standalone/* $DEPLOYPATH/
