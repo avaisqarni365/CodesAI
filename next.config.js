@@ -6,8 +6,8 @@ const nextConfig = {
     unoptimized: true, // Required for static export
   },
   // Uncomment below for static export (no server-side features)
-  // output: 'export',
-  // trailingSlash: true,
+   output: 'export',
+   trailingSlash: true,
 };
 
 module.exports = nextConfig;
